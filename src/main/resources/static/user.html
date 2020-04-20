@@ -10,22 +10,23 @@
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <script type="text/javascript" src="./layui/layui.js"></script>
     <script type="text/javascript" src="./javascript/jquery.min.js"></script>
-
-
+    <script type="text/javascript" src="./javascript/xlsx.full.min.js"></script>
 </head>
 <table class="layui-hide" id="demo" name="user" lay-data="{height: 'full-200', cellMinWidth: 80, page: true, limit:10}"
-    lay-filter="test"></table>
+       lay-filter="test"></table>
 
 <script type="text/html" id="toolbarDemo">
-        <div class="layui-btn-container">
-          <button class="layui-btn layui-btn-sm" lay-event="add">添加用户</button>
-          <button class="layui-btn layui-btn-sm" lay-event="delete">删除用户</button>
-        </div>
-      </script>
+    <div class="layui-btn-container">
+        <a class="layui-btn layui-btn-sm" lay-event="import">导入班级名册</a>
+        <input type="file" style="display: none" id="import" onchange="importf(this)">
+        <button class="layui-btn layui-btn-sm" lay-event="add">添加用户</button>
+        <!--          <button class="layui-btn layui-btn-sm" lay-event="delete">删除用户</button>-->
+    </div>
+</script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" id ="update" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs" id="update" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-  </script>
+</script>
 <script>
 
 
@@ -38,7 +39,7 @@
         table.render({
             elem: '#demo'
             , toolbar: '#toolbarDemo' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
-            
+
             , url: 'http://127.0.0.1:8088/user/findAll' //数据接口
             , request: {
                 pageName: 'pageNum' //页码的参数名称，默认：page
@@ -47,14 +48,14 @@
             , title: '用户表'
             , page: true //开启分页
             , cols: [[ //表头
-                { type: 'checkbox', fixed: 'left' }
-                , { field: 'id', title: 'ID',  sort: true, fixed: 'left', align: "center" }
-                , { field: 'username', title: '用户名', align: "center" }
-                , { field: 'password', title: '密码',  align: "center" }
-                , { field: 'role', title: '角色', align: "center" }
-                , { field: 'statu', title: '状态',  align: "center" }
-                , { field: 'mark', title: '备注',  align: "center" }
-                , { fixed: 'right', align: 'center', toolbar: '#barDemo' }
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'id', title: '学号', sort: true, fixed: 'left', align: "center"}
+                , {field: 'username', title: '用户名', align: "center"}
+                , {field: 'password', title: '密码', align: "center"}
+                // , { field: 'role', title: '角色', align: "center" }
+                , {field: 'statu', title: '状态', align: "center"}
+                , {field: 'mark', title: '备注', align: "center"}
+                , {fixed: 'right', align: 'center', toolbar: '#barDemo'}
             ]]
 
         });
@@ -70,13 +71,16 @@
                 case 'delete':
                     if (data.length === 0) {
                         layer.msg('请选择一行');
-                    } else if (data.length == 1) {
+                    } else if (data.length === 1) {
                         del(data[0])
                     } else {
                         layer.msg("多条删除待开发")
                     }
                     break;
-            };
+                case 'import':
+                    $("#import").click();
+                    break;
+            }
         });
 
         //监听行工具事件
@@ -126,7 +130,7 @@
 
     //打开用户编辑窗口
     function opensUer(data, title) {
-        var  url = 'son/userson.html?tag=update='+data.id;
+        var url = 'son/userson.html?tag=update=' + data.id;
         layer.open({
             id: 'user',
             type: 2,
@@ -138,11 +142,66 @@
             anim: 1,
         });
     }
+
     //重新加载table
     function reload() {
         table.reload('demo', {
             url: 'http://127.0.0.1:8088/user/findAll'
         })
+    }
+
+    // 导入数据
+    var wb;//读取完成的数据
+    var rABS = false; //是否将文件读取为二进制字符串
+
+    function importf(obj) {//导入
+        if (!obj.files) {
+            return;
+        }
+        var f = obj.files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var data = e.target.result;
+            if (rABS) {
+                wb = XLSX.read(btoa(fixdata(data)), {//手动转化
+                    type: 'base64'
+                });
+            } else {
+                wb = XLSX.read(data, {
+                    type: 'binary'
+                });
+            }
+            //wb.SheetNames[0]是获取Sheets中第一个Sheet的名字
+            //wb.Sheets[Sheet名]获取第一个Sheet的数据
+            let students = JSON.stringify(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]));
+            console.log(students);
+            $.post("http://127.0.0.1:8088/user/batchImport", {
+                students
+            }, function (res) {
+                if (res.status === 0) {
+                    table.reload('demo', {
+                        url: 'http://127.0.0.1:8088/user/findAll'
+                    })
+                } else {
+                    layer.msg(res.msg)
+                }
+            });
+
+        };
+        if (rABS) {
+            reader.readAsArrayBuffer(f);
+        } else {
+            reader.readAsBinaryString(f);
+        }
+    }
+
+    function fixdata(data) { //文件流转BinaryString
+        var o = "",
+            l = 0,
+            w = 10240;
+        for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
+        o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+        return o;
     }
 </script>
 

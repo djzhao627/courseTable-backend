@@ -18,9 +18,9 @@
         <plugin type="com.itfsw.mybatis.generator.plugins.ModelCloneablePlugin"/>
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <plugin type="org.mybatis.generator.plugins.FluentBuilderMethodsPlugin"/>
-        <plugin type="com.tigerbrokers.alpha.commons.mybatis.generator.plugin.SelectForUpdatePlugin"/>
+        <!--<plugin type="com.tigerbrokers.alpha.commons.mybatis.generator.plugin.SelectForUpdatePlugin"/>
         <plugin type="com.tigerbrokers.alpha.commons.mybatis.generator.plugin.MySqlUpsertPlugin"/>
-        <plugin type="com.tigerbrokers.alpha.commons.mybatis.generator.plugin.BitMapPlugin"/>
+        <plugin type="com.tigerbrokers.alpha.commons.mybatis.generator.plugin.BitMapPlugin"/>-->
         <!-- 数据Model属性对应Column获取插件 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin"/>
         <plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin">
@@ -42,9 +42,9 @@
 
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/arranging_courses?useSSL=false&amp;characterEncoding=utf8"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/arranging_courses?useSSL=false&amp;characterEncoding=utf8&amp;serverTimezone=UTC"
                         userId="root"
-                        password="Wh1206123.">
+                        password="000000">
         </jdbcConnection>
 
         <javaTypeResolver>
@@ -90,14 +90,14 @@
         <!--<table schema="arranging_courses" tableName="speciality" domainObjectName="Speciality">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
-        <table schema="arranging_courses" tableName="course_table" domainObjectName="CourseTable">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table schema="arranging_courses" tableName="course_table" domainObjectName="CourseTable">-->
+        <!--    <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
         <!--<table schema="arranging_courses" tableName="teacher" domainObjectName="Teacher">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
-        <!--<table schema="arranging_courses" tableName="user" domainObjectName="User">-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
+        <table schema="arranging_courses" tableName="user" domainObjectName="User2">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
     </context>
 </generatorConfiguration>

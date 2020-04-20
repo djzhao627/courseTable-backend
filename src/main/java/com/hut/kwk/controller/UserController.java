@@ -1,16 +1,22 @@
 package com.hut.kwk.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hut.kwk.constant.LayerResponse;
 import com.hut.kwk.constant.ServerResponse;
 import com.hut.kwk.model.entity.User;
+import com.hut.kwk.model.entity.User2;
 import com.hut.kwk.service.IUserService;
 import com.hut.kwk.util.ToLayerUtil;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -18,6 +24,7 @@ import java.util.List;
  *
  * @author kwk
  */
+@Slf4j
 @RestController
 @RequestMapping("/user/")
 public class UserController {
@@ -103,7 +110,28 @@ public class UserController {
      * @return
      */
     @RequestMapping("update")
-    public ServerResponse<String> update(Integer id, String username, String password,String role) {
-        return iUserService.update(id, username, password,role);
+    public ServerResponse<String> update(Integer id, String username, String password, String role) {
+        return iUserService.update(id, username, password, role);
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param students 用户数据
+     * @return
+     */
+    @RequestMapping("batchImport")
+    public ServerResponse<String> batchImport(String students) {
+        log.info(students);
+        students = students.replace("学号", "no");
+        students = students.replace("姓名", "username");
+        students = students.replace("年龄", "age");
+        students = students.replace("备注", "mark");
+        log.info(students);
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<User2>>() {
+        }.getType();
+        List<User2> list = gson.fromJson(students, type);
+        return iUserService.batchImport(list);
     }
 }

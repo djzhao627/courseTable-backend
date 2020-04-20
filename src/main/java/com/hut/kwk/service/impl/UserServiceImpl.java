@@ -5,7 +5,9 @@ import com.github.pagehelper.PageInfo;
 import com.hut.kwk.constant.Constant;
 import com.hut.kwk.constant.ServerResponse;
 import com.hut.kwk.model.entity.User;
+import com.hut.kwk.model.entity.User2;
 import com.hut.kwk.model.entity.UserQuery;
+import com.hut.kwk.model.mapper.User2Mapper;
 import com.hut.kwk.model.mapper.UserMapper;
 import com.hut.kwk.service.IUserService;
 import org.apache.ibatis.session.RowBounds;
@@ -24,6 +26,9 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private User2Mapper user2Mapper;
 
     @Override
     public ServerResponse<String> add(String username, String password, String role) {
@@ -101,5 +106,15 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createBySuccessMessage("更新成功");
         }
         return ServerResponse.createByErrorMessage("更新失败");
+    }
+
+    @Override
+    public ServerResponse<String> batchImport(List<User2> user2s) {
+        int insert = user2Mapper.batchInsert(user2s);
+        if (insert > 0) {
+            return ServerResponse.createBySuccessMessage("批量插入成功");
+        } else {
+            return ServerResponse.createByErrorMessage("批量插入失败");
+        }
     }
 }

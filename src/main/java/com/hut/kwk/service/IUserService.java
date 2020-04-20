@@ -3,6 +3,9 @@ package com.hut.kwk.service;
 import com.github.pagehelper.PageInfo;
 import com.hut.kwk.constant.ServerResponse;
 import com.hut.kwk.model.entity.User;
+import com.hut.kwk.model.entity.User2;
+
+import java.util.List;
 
 /**
  * Create by kwk on 2019-04-17
@@ -21,4 +24,6 @@ public interface IUserService {
     ServerResponse<User> findById(Integer id);
 
     ServerResponse<String> update(Integer id, String username, String password,String role);
+
+    ServerResponse<String> batchImport(List<User2> user2s);
 }
