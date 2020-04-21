@@ -32,6 +32,7 @@
 
 </script>
 <script>
+    let isRemoveAll = false;
     var table;
     layui.use(['table'], function () {
         table = layui.table //表格
@@ -49,11 +50,10 @@
             , page: true //开启分页
             , cols: [[ //表头
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'id', title: '学号', sort: true, fixed: 'left', align: "center"}
-                , {field: 'username', title: '用户名', align: "center"}
+                , {field: 'no', title: '学号', sort: true, fixed: 'left', align: "center"}
+                , {field: 'username', title: '姓名', align: "center"}
                 , {field: 'password', title: '密码', align: "center"}
-                // , { field: 'role', title: '角色', align: "center" }
-                , {field: 'statu', title: '状态', align: "center"}
+                , {field: 'age', title: '年龄', align: "center"}
                 , {field: 'mark', title: '备注', align: "center"}
                 , {fixed: 'right', align: 'center', toolbar: '#barDemo'}
             ]]
@@ -78,7 +78,15 @@
                     }
                     break;
                 case 'import':
-                    $("#import").click();
+                    layer.confirm('是否需要在导入前清空原有数据？',
+                        {btn: ['清空', '直接导入']},
+                        function () {
+                            isRemoveAll = true;
+                            $("#import").click();
+                        }, function () {
+                            isRemoveAll = false;
+                            $("#import").click();
+                        });
                     break;
             }
         });
@@ -155,6 +163,7 @@
     var rABS = false; //是否将文件读取为二进制字符串
 
     function importf(obj) {//导入
+
         if (!obj.files) {
             return;
         }
@@ -175,9 +184,12 @@
             //wb.Sheets[Sheet名]获取第一个Sheet的数据
             let students = JSON.stringify(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]));
             console.log(students);
+
             $.post("http://127.0.0.1:8088/user/batchImport", {
-                students
+                students,
+                isRemoveAll
             }, function (res) {
+                layer.close(layer.index);
                 if (res.status === 0) {
                     table.reload('demo', {
                         url: 'http://127.0.0.1:8088/user/findAll'

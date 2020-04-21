@@ -21,6 +21,9 @@ public class ArrangingCoursesApplication {
         ConfigurableEnvironment env = context.getEnvironment();
         String ip = InetAddress.getLocalHost().getHostAddress();
         String port = env.getProperty("server.port");
+        if (port == null) {
+            port = "8080";
+        }
         String contextPath = env.getProperty("server.servlet.context-path");
         if (contextPath == null) {
             contextPath = "";

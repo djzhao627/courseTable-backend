@@ -6,6 +6,7 @@ import com.hut.kwk.constant.Constant;
 import com.hut.kwk.constant.ServerResponse;
 import com.hut.kwk.model.entity.User;
 import com.hut.kwk.model.entity.User2;
+import com.hut.kwk.model.entity.User2Query;
 import com.hut.kwk.model.entity.UserQuery;
 import com.hut.kwk.model.mapper.User2Mapper;
 import com.hut.kwk.model.mapper.UserMapper;
@@ -71,21 +72,21 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public ServerResponse<PageInfo<User>> findAll(String role, Integer pageNum, Integer pageSize) {
+    public ServerResponse<PageInfo<User2>> findAll(String role, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        UserQuery query = new UserQuery();
-        List<User> users;
-        PageInfo<User> pageInfo;
+        User2Query query = new User2Query();
+        List<User2> users;
+        PageInfo<User2> pageInfo;
         if (role.equals(Constant.ADMIN)) {
-            users = userMapper.selectByExampleWithRowbounds(query, new RowBounds((pageNum - 1) * 10, pageSize));
+            users = user2Mapper.selectByExampleWithRowbounds(query, new RowBounds((pageNum - 1) * 10, pageSize));
             pageInfo = new PageInfo<>(users);
-            pageInfo.setTotal(userMapper.countByExample(query));
+            pageInfo.setTotal(user2Mapper.countByExample(query));
 
         } else {
             query.createCriteria().andRoleEqualTo(Constant.NOT_ADMIN);
-            users = userMapper.selectByExampleWithRowbounds(query, new RowBounds((pageNum - 1) * 10, pageSize));
+            users = user2Mapper.selectByExampleWithRowbounds(query, new RowBounds((pageNum - 1) * 10, pageSize));
             pageInfo = new PageInfo<>(users);
-            pageInfo.setTotal(userMapper.countByExample(query));
+            pageInfo.setTotal(user2Mapper.countByExample(query));
         }
         return ServerResponse.createBySuccess(pageInfo);
     }
@@ -116,5 +117,11 @@ public class UserServiceImpl implements IUserService {
         } else {
             return ServerResponse.createByErrorMessage("批量插入失败");
         }
+    }
+
+    @Override
+    public ServerResponse<String> deleteAll() {
+        user2Mapper.deleteAll();
+        return ServerResponse.createBySuccessMessage("删除全部成功");
     }
 }

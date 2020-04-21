@@ -9,7 +9,6 @@ import com.hut.kwk.model.entity.User;
 import com.hut.kwk.model.entity.User2;
 import com.hut.kwk.service.IUserService;
 import com.hut.kwk.util.ToLayerUtil;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,9 +83,9 @@ public class UserController {
      * @return
      */
     @RequestMapping("findAll")
-    public LayerResponse<List<User>> findAll(HttpSession session, Integer pageNum, Integer pageSize) {
+    public LayerResponse<List<User2>> findAll(HttpSession session, Integer pageNum, Integer pageSize) {
         User user = (User) session.getAttribute(session.getId());
-        ServerResponse<PageInfo<User>> all = iUserService.findAll("超级管理员", pageNum, pageSize);
+        ServerResponse<PageInfo<User2>> all = iUserService.findAll("超级管理员", pageNum, pageSize);
         return ToLayerUtil.toLayer(all);
     }
 
@@ -121,17 +120,19 @@ public class UserController {
      * @return
      */
     @RequestMapping("batchImport")
-    public ServerResponse<String> batchImport(String students) {
-        log.info(students);
+    public ServerResponse<String> batchImport(String students, boolean isRemoveAll) {
         students = students.replace("学号", "no");
+        students = students.replace("密码", "password");
         students = students.replace("姓名", "username");
         students = students.replace("年龄", "age");
         students = students.replace("备注", "mark");
-        log.info(students);
         Gson gson = new Gson();
         Type type = new TypeToken<List<User2>>() {
         }.getType();
         List<User2> list = gson.fromJson(students, type);
+        if (isRemoveAll) {
+            iUserService.deleteAll();
+        }
         return iUserService.batchImport(list);
     }
 }

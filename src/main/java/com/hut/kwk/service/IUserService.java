@@ -19,11 +19,13 @@ public interface IUserService {
 
     ServerResponse<String> del(Integer id);
 
-    ServerResponse<PageInfo<User>> findAll(String role, Integer pageNum, Integer pageSize);
+    ServerResponse<PageInfo<User2>> findAll(String role, Integer pageNum, Integer pageSize);
 
     ServerResponse<User> findById(Integer id);
 
     ServerResponse<String> update(Integer id, String username, String password,String role);
 
     ServerResponse<String> batchImport(List<User2> user2s);
+
+    ServerResponse<String> deleteAll();
 }
