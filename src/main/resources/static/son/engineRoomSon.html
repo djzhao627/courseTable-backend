@@ -20,14 +20,14 @@
 
 <body>
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-        <legend>添加教室</legend>
+        <legend>添加机房</legend>
     </fieldset>
     <form class="layui-form layui-form-pane" action="">
 
         <div class="layui-form-item">
-            <label class="layui-form-label">教室名</label>
+            <label class="layui-form-label">机房名</label>
             <div class="layui-input-inline">
-                <input type="text" name="roomName" id="roomName" autocomplete="off" lay-verify="title" placeholder="请输入教室名字" class="layui-input">
+                <input type="text" name="roomName" id="roomName" autocomplete="off" lay-verify="title" placeholder="请输入机房名字" class="layui-input">
             </div>
         </div>
 
@@ -47,9 +47,9 @@
         </div>
        
         <div class="layui-form-item">
-            <label class="layui-form-label">教室空间</label>
+            <label class="layui-form-label">机房空间</label>
             <div class="layui-input-inline">
-                <input type="text" name="roomSpace" id="roomSpace" autocomplete="off" lay-verify="num" placeholder="请输入整数教室空间"
+                <input type="text" name="roomSpace" id="roomSpace" autocomplete="off" lay-verify="num" placeholder="请输入整数机房空间"
                     class="layui-input">
             </div>
         </div>
@@ -69,7 +69,7 @@
             let tag = window.location.href.split("=");
             if (tag.length == 3 && tag[1] == "update") {
                 let id = window.location.href.split("=")[2];
-                var u = "http://127.0.0.1:8088/classroom/find?id=" + id;
+                var u = "http://127.0.0.1:8088/engineRoom/find?id=" + id;
                 $.get(u, function (data, status) {
                     console.log(u)
                     var ret = JSON.parse(JSON.stringify(data));
@@ -95,12 +95,12 @@
             form.verify({
                 title: function (value) {
                     if (value = null || value.length == 0) {
-                        return '教室名不能为空';
+                        return '机房名不能为空';
                     }
                 }
                 , num: function (value) {
                     if (value = null || value.length == 0||patrn.exec(value) == null) {
-                        return '教室空间只能为非空数字';
+                        return '机房空间只能为非空数字';
                     }
                 }
                 , content: function (value) {
@@ -112,10 +112,10 @@
                 var url;
                 //Integer id, String roomName, Integer roomSpace, Integer roomLaye
                 if (tag.length == 2) {
-                    url = "http://127.0.0.1:8088/classroom/add?roomName=" + $("#roomName").val() + "&roomSpace=" + $("#roomSpace").val() + "&roomLayer=" + $("#roomLayer  option:selected").val();
+                    url = "http://127.0.0.1:8088/engineRoom/add?roomName=" + $("#roomName").val() + "&roomSpace=" + $("#roomSpace").val() + "&roomLayer=" + $("#roomLayer  option:selected").val();
                 } else if (tag.length == 3) {
                     let id = window.location.href.split("=")[2];
-                    url = "http://127.0.0.1:8088/classroom/update?id=" + id + "&roomName=" + $("#roomName").val() + "&roomSpace=" + $("#roomSpace").val() + "&roomLayer=" + $("#roomLayer  option:selected").val();
+                    url = "http://127.0.0.1:8088/engineRoom/update?id=" + id + "&roomName=" + $("#roomName").val() + "&roomSpace=" + $("#roomSpace").val() + "&roomLayer=" + $("#roomLayer  option:selected").val();
                 }
                 console.log(url)
                 var datas = JSON.parse(JSON.stringify(data.field));

@@ -51,20 +51,20 @@
             <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.hut.kwk.model.entity"
+        <javaModelGenerator targetPackage="cn.djzhao.model.entity"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
             <property name="constructorBased" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.hut.kwk.model.mapper"
+        <sqlMapGenerator targetPackage="cn.djzhao.model.mapper"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <javaClientGenerator type="MIXEDMAPPER"
-                             targetPackage="com.hut.kwk.model.mapper"
+                             targetPackage="cn.djzhao.model.mapper"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
