@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2020-04-21 07:08:13
+Date: 2020-04-23 00:07:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -74,7 +74,7 @@ CREATE TABLE `classroom` (
   `statu` int(10) DEFAULT '0',
   `mark` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='教室表';
 
 -- ----------------------------
 -- Records of classroom
@@ -144,6 +144,27 @@ CREATE TABLE `course_table` (
 -- ----------------------------
 -- Records of course_table
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for engine_room
+-- ----------------------------
+DROP TABLE IF EXISTS `engine_room`;
+CREATE TABLE `engine_room` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `room_name` varchar(20) NOT NULL DEFAULT '',
+  `room_space` int(4) NOT NULL,
+  `room_layer` int(10) NOT NULL,
+  `room_sign` int(11) DEFAULT '0',
+  `statu` int(10) DEFAULT '0',
+  `mark` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='机房表';
+
+-- ----------------------------
+-- Records of engine_room
+-- ----------------------------
+INSERT INTO `engine_room` VALUES ('1', 'I302', '50', '1', '0', '0', null);
+INSERT INTO `engine_room` VALUES ('2', '啊啊', '77', '3', '0', '0', null);
 
 -- ----------------------------
 -- Table structure for semester
@@ -227,17 +248,17 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `no` varchar(20) DEFAULT NULL COMMENT '学号',
-  `username` varchar(20) NOT NULL DEFAULT '',
+  `username` varchar(20) DEFAULT '',
   `password` varchar(20) DEFAULT '',
   `role` varchar(10) DEFAULT '普通用户',
   `age` int(3) DEFAULT NULL COMMENT '年纪',
   `statu` int(11) DEFAULT '0',
   `mark` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', null, 'kwk', '123', '超级管理员', null, '0', '无');
-INSERT INTO `user` VALUES ('2', null, 'admin', '123456', '超级管理员', null, '0', null);
+INSERT INTO `user` VALUES ('17', '1', 'kwk', '123456', null, '23', null, '无');
+INSERT INTO `user` VALUES ('18', '2', 'admin', '123456', null, '21', null, null);
