@@ -30,7 +30,7 @@ public class TermRoomServiceImpl implements ITermRoomService {
     private CourseTableMapper courseTableMapper;
 
     @Override
-    public ServerResponse<String> add(String roomName, Integer roomSpace, Integer roomLayer) {
+    public ServerResponse<String> add(String roomName, String mark) {
         TermRoomQuery query = new TermRoomQuery();
         query.createCriteria().andRoomNameEqualTo(roomName);
         TermRoom TermRoom = TermRoomMapper.selectOneByExample(query);
@@ -39,8 +39,7 @@ public class TermRoomServiceImpl implements ITermRoomService {
         }
         TermRoom c = new TermRoom();
         c.setRoomName(roomName);
-        c.setRoomSpace(roomSpace);
-        c.setRoomLayer(roomLayer);
+        c.setMark(mark);
         int count = TermRoomMapper.insertSelective(c);
         if (count > 0) {
             return ServerResponse.createBySuccessMessage("新建成功");
@@ -73,12 +72,10 @@ public class TermRoomServiceImpl implements ITermRoomService {
     }
 
     @Override
-    public ServerResponse<String> update(Integer id, String roomName, Integer roomSpace, Integer roomLaye) {
+    public ServerResponse<String> update(Integer id, String roomName, String mark) {
         TermRoom TermRoom = TermRoomMapper.selectByPrimaryKey(id);
         TermRoom.setRoomName(roomName);
-        TermRoom.setRoomSpace(roomSpace);
-        TermRoom.setRoomLayer(roomLaye);
-        System.out.println(roomLaye);
+        TermRoom.setMark(mark);
         int count = TermRoomMapper.updateByPrimaryKeySelective(TermRoom);
         if (count > 0) {
             return ServerResponse.createBySuccessMessage("更新成功");

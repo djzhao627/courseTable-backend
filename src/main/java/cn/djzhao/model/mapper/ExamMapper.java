@@ -48,7 +48,7 @@ public interface ExamMapper {
         "day_limit, statu, ",
         "mark)",
         "values (#{className,jdbcType=VARCHAR}, #{classNumber,jdbcType=VARCHAR}, ",
-        "#{dayLimit,jdbcType=INTEGER}, #{statu,jdbcType=INTEGER}, ",
+        "#{dayLimit,jdbcType=INTEGER}, #{statu,jdbcType=VARCHAR}, ",
         "#{mark,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
@@ -137,7 +137,7 @@ public interface ExamMapper {
         "set class_name = #{className,jdbcType=VARCHAR},",
           "class_number = #{classNumber,jdbcType=VARCHAR},",
           "day_limit = #{dayLimit,jdbcType=INTEGER},",
-          "statu = #{statu,jdbcType=INTEGER},",
+          "statu = #{statu,jdbcType=VARCHAR},",
           "mark = #{mark,jdbcType=VARCHAR}",
         "where id = #{id,jdbcType=INTEGER}"
     })

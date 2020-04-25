@@ -36,12 +36,12 @@ public class UserController {
      *
      * @param username
      * @param password
-     * @param role
+     * @param age
      * @return
      */
     @RequestMapping("add")
-    public ServerResponse<String> add(String username, String password, String role) {
-        return iUserService.add(username, password, role);
+    public ServerResponse<String> add(String username, String password, String age, String no) {
+        return iUserService.add(username, password, age, no);
 
     }
 
@@ -109,8 +109,8 @@ public class UserController {
      * @return
      */
     @RequestMapping("update")
-    public ServerResponse<String> update(Integer id, String username, String password, String role) {
-        return iUserService.update(id, username, password, role);
+    public ServerResponse<String> update(Integer id, String username, String password, String age, String no) {
+        return iUserService.update(id, username, password, age, no);
     }
 
     /**
@@ -121,11 +121,10 @@ public class UserController {
      */
     @RequestMapping("batchImport")
     public ServerResponse<String> batchImport(String students, boolean isRemoveAll) {
-        students = students.replace("学号", "no");
+        students = students.replace("学号", "mark");
         students = students.replace("密码", "password");
         students = students.replace("姓名", "username");
-        students = students.replace("年龄", "age");
-        students = students.replace("备注", "mark");
+        students = students.replace("年龄", "role");
         Gson gson = new Gson();
         Type type = new TypeToken<List<User2>>() {
         }.getType();

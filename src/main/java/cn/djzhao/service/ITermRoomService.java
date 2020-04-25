@@ -8,7 +8,7 @@ import com.github.pagehelper.PageInfo;
 import java.util.List;
 
 public interface ITermRoomService {
-    ServerResponse<String> add(String roomName, Integer roomSpace, Integer roomLayer);
+    ServerResponse<String> add(String roomName, String mark);
 
     ServerResponse<String> del(Integer id);
 
@@ -16,7 +16,7 @@ public interface ITermRoomService {
 
     ServerResponse<PageInfo<TermRoom>> findAll(Integer pageNum, Integer pageSize);
 
-    ServerResponse<String> update(Integer id, String roomName, Integer roomSpace, Integer roomLaye);
+    ServerResponse<String> update(Integer id, String roomName, String mark);
 
     List<TermRoomFree> findByWeek(Integer week, String roomName);
 }

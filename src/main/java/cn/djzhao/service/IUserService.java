@@ -13,9 +13,11 @@ import java.util.List;
  * @author kwk
  */
 public interface IUserService {
-    ServerResponse<String> add(String username, String password, String role);
+    ServerResponse<String> add(String username, String password, String role, String no);
 
     ServerResponse<User> login(String username, String password, String role);
+
+    User login(String no, String password);
 
     ServerResponse<String> del(Integer id);
 
@@ -23,7 +25,7 @@ public interface IUserService {
 
     ServerResponse<User> findById(Integer id);
 
-    ServerResponse<String> update(Integer id, String username, String password,String role);
+    ServerResponse<String> update(Integer id, String username, String password,String age, String no);
 
     ServerResponse<String> batchImport(List<User2> user2s);
 

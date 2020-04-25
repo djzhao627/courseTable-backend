@@ -21,6 +21,13 @@
 <body>
     <form class="layui-form layui-form-pane" action="" style="margin-top: 30px;">
         <div class="layui-form-item">
+            <label class="layui-form-label">学号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="no" id="no" autocomplete="off" lay-verify="title"
+                    placeholder="请输入学号" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-inline">
                 <input type="text" name="username" id="username" autocomplete="off" lay-verify="title"
@@ -34,10 +41,12 @@
                     autocomplete="off" class="layui-input">
             </div>
         </div>
-
-        <div class="layui-input-item">
-            <input type="radio" name="rol" id="admin" value="超级管理员" title="超级管理员" checked>
-            <input type="radio" name="rol" id="user" value="普通用户" title="普通用户">
+        <div class="layui-form-item">
+            <label class="layui-form-label">年龄</label>
+            <div class="layui-input-inline">
+                <input type="text" name="age" id="age" placeholder="请输入年龄"
+                    autocomplete="off" class="layui-input">
+            </div>
         </div>
 
         <div class="layui-form-item layui-form-mid">
@@ -63,6 +72,8 @@
                     } else {
                         $("#username").val(ret.data.username)
                         $("#password").val(ret.data.password)
+                        $("#age").val(ret.data.role)
+                        $("#no").val(ret.data.mark)
 
                         if (ret.data.role = "超级管理员") {
                             $("#admin").attr("checked", "true")
@@ -101,10 +112,10 @@
             form.on('submit(demo)', function (data) {
                 var url;
                 if (tag.length == 2) {
-                    url = "http://127.0.0.1:8088/user/add?username=" + $("#username").val() + "&password=" + $("#password").val() + "&role=" + $("input[name='rol']:checked").val();
+                    url = "http://127.0.0.1:8088/user/add?username=" + $("#username").val() + "&password=" + $("#password").val() + "&age=" + $("#age").val() + "&no=" + $("#no").val();
                 } else if (tag.length == 3) {
                     let id = window.location.href.split("=")[2];
-                    url = "http://127.0.0.1:8088/user/update?id=" + id + "&username" + $("#username").val() + "&password=" + $("#password").val() + "&role=" + $("input[name='rol']:checked").val();
+                    url = "http://127.0.0.1:8088/user/update?id=" + id + "&username" + $("#username").val() + "&password=" + $("#password").val() + "&age=" + $("#age").val() + "&no=" + $("#no").val();
                 }
                 console.log(url)
                 $.get(url, function (data, status) {

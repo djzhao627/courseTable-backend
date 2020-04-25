@@ -11,7 +11,7 @@
       <arg column="class_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="class_number" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="day_limit" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="statu" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="statu" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="mark" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
@@ -156,7 +156,7 @@
         #{dayLimit,jdbcType=INTEGER},
       </if>
       <if test="statu != null">
-        #{statu,jdbcType=INTEGER},
+        #{statu,jdbcType=VARCHAR},
       </if>
       <if test="mark != null">
         #{mark,jdbcType=VARCHAR},
@@ -193,7 +193,7 @@
         day_limit = #{record.dayLimit,jdbcType=INTEGER},
       </if>
       <if test="record.statu != null">
-        statu = #{record.statu,jdbcType=INTEGER},
+        statu = #{record.statu,jdbcType=VARCHAR},
       </if>
       <if test="record.mark != null">
         mark = #{record.mark,jdbcType=VARCHAR},
@@ -213,7 +213,7 @@
       class_name = #{record.className,jdbcType=VARCHAR},
       class_number = #{record.classNumber,jdbcType=VARCHAR},
       day_limit = #{record.dayLimit,jdbcType=INTEGER},
-      statu = #{record.statu,jdbcType=INTEGER},
+      statu = #{record.statu,jdbcType=VARCHAR},
       mark = #{record.mark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -236,7 +236,7 @@
         day_limit = #{dayLimit,jdbcType=INTEGER},
       </if>
       <if test="statu != null">
-        statu = #{statu,jdbcType=INTEGER},
+        statu = #{statu,jdbcType=VARCHAR},
       </if>
       <if test="mark != null">
         mark = #{mark,jdbcType=VARCHAR},
@@ -282,7 +282,7 @@
       #{className,jdbcType=VARCHAR},
       #{classNumber,jdbcType=VARCHAR},
       #{dayLimit,jdbcType=INTEGER},
-      #{statu,jdbcType=INTEGER},
+      #{statu,jdbcType=VARCHAR},
       #{mark,jdbcType=VARCHAR},
     </trim>
     on duplicate key update 
@@ -291,7 +291,7 @@
       class_name = #{className,jdbcType=VARCHAR},
       class_number = #{classNumber,jdbcType=VARCHAR},
       day_limit = #{dayLimit,jdbcType=INTEGER},
-      statu = #{statu,jdbcType=INTEGER},
+      statu = #{statu,jdbcType=VARCHAR},
       mark = #{mark,jdbcType=VARCHAR},
     </trim>
   </update>
@@ -336,7 +336,7 @@
         #{dayLimit,jdbcType=INTEGER},
       </if>
       <if test="statu != null">
-        #{statu,jdbcType=INTEGER},
+        #{statu,jdbcType=VARCHAR},
       </if>
       <if test="mark != null">
         #{mark,jdbcType=VARCHAR},
@@ -357,7 +357,7 @@
         day_limit = #{dayLimit,jdbcType=INTEGER},
       </if>
       <if test="statu != null">
-        statu = #{statu,jdbcType=INTEGER},
+        statu = #{statu,jdbcType=VARCHAR},
       </if>
       <if test="mark != null">
         mark = #{mark,jdbcType=VARCHAR},
@@ -375,7 +375,7 @@
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.className,jdbcType=VARCHAR}, #{item.classNumber,jdbcType=VARCHAR}, #{item.dayLimit,jdbcType=INTEGER}, 
-        #{item.statu,jdbcType=INTEGER}, #{item.mark,jdbcType=VARCHAR})
+        #{item.statu,jdbcType=VARCHAR}, #{item.mark,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <insert id="batchInsertSelective" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
@@ -403,7 +403,7 @@
           #{item.dayLimit,jdbcType=INTEGER}
         </if>
         <if test="'statu'.toString() == column.value">
-          #{item.statu,jdbcType=INTEGER}
+          #{item.statu,jdbcType=VARCHAR}
         </if>
         <if test="'mark'.toString() == column.value">
           #{item.mark,jdbcType=VARCHAR}

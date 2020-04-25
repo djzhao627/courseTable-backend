@@ -31,6 +31,12 @@
                 <input type="text" name="className" id="className" autocomplete="off" lay-verify="title" placeholder="请输入班级名字" class="layui-input">
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">科目</label>
+            <div class="layui-input-inline">
+                <input type="text" name="subject" id="subject" autocomplete="off" placeholder="请输入科目" class="layui-input">
+            </div>
+        </div>
 
         <div class="layui-form-item">
                 <label class="layui-form-label">时间</label>
@@ -72,6 +78,7 @@
                         $("#className").val(ret.data.className)
                         $("#classNum").val(ret.data.classNumber)
                         $("#mark").val(ret.data.mark)
+                        $("#subject").val(ret.data.statu)
 
                     }
                 });
@@ -107,10 +114,10 @@
 
                 var url;
                 if (tag.length == 2) {
-                    url = "http://127.0.0.1:8088/exam/add?className=" + $("#className").val() + "&classNum=" + $("#classNum").val() + "&mark=" + $("#mark").val();
+                    url = "http://127.0.0.1:8088/exam/add?className=" + $("#className").val() + "&classNum=" + $("#classNum").val() + "&mark=" + $("#mark").val() + "&subject=" + $("#subject").val();
                 } else if (tag.length == 3) {
                     let id = window.location.href.split("=")[2];
-                    url = "http://127.0.0.1:8088/exam/update?id=" + id + "&className=" + $("#className").val() + "&classNum=" + $("#classNum").val() + "&mark=" + $("#mark").val();
+                    url = "http://127.0.0.1:8088/exam/update?id=" + id + "&className=" + $("#className").val() + "&classNum=" + $("#classNum").val() + "&mark=" + $("#mark").val() + "&subject=" + $("#subject").val();
                 }
                 console.log(url)
                 var datas = JSON.parse(JSON.stringify(data.field));

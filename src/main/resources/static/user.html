@@ -50,11 +50,10 @@
             , page: true //开启分页
             , cols: [[ //表头
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'no', title: '学号', sort: true, fixed: 'left', align: "center"}
+                , {field: 'mark', title: '学号', sort: true, fixed: 'left', align: "center"}
                 , {field: 'username', title: '姓名', align: "center"}
                 , {field: 'password', title: '密码', align: "center"}
-                , {field: 'age', title: '年龄', align: "center"}
-                , {field: 'mark', title: '备注', align: "center"}
+                , {field: 'role', title: '年龄', align: "center"}
                 , {fixed: 'right', align: 'center', toolbar: '#barDemo'}
             ]]
 
@@ -112,7 +111,7 @@
             title: title,
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
-            area: ['350px', '300px'],
+            area: ['350px', '400px'],
             content: url,
             anim: 1,
         });

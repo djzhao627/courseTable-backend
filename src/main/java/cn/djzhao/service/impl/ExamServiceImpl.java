@@ -22,7 +22,7 @@ public class ExamServiceImpl implements IExamService {
     private ExamMapper ExamMapper;
 
     @Override
-    public ServerResponse<String> add(String className, String classNum, String mark) {
+    public ServerResponse<String> add(String className, String classNum, String mark, String subject) {
         ExamQuery query = new ExamQuery();
         query.createCriteria().andClassNameEqualTo(className);
         Exam Exam = ExamMapper.selectOneByExample(query);
@@ -33,6 +33,7 @@ public class ExamServiceImpl implements IExamService {
         c.setClassName(className);
         c.setClassNumber(classNum);
         c.setMark(mark);
+        c.setStatu(subject);
         int count = ExamMapper.insertSelective(c);
         if (count > 0) {
             return ServerResponse.createBySuccessMessage("新建成功");
@@ -50,11 +51,12 @@ public class ExamServiceImpl implements IExamService {
     }
 
     @Override
-    public ServerResponse<String> update(Integer id, String className, String classNum,String mark) {
+    public ServerResponse<String> update(Integer id, String className, String classNum,String mark,String subject) {
         Exam Exam = ExamMapper.selectByPrimaryKey(id);
         Exam.setClassName(className);
         Exam.setClassNumber(classNum);
         Exam.setMark(mark);
+        Exam.setStatu(subject);
         int count = ExamMapper.updateByPrimaryKeySelective(Exam);
         if (count > 0) {
             return ServerResponse.createBySuccessMessage("更新成功");

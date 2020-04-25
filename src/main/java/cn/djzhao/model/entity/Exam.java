@@ -48,7 +48,7 @@ public class Exam implements Cloneable, Serializable {
      *
      * @mbg.generated
      */
-    private Integer statu;
+    private String statu;
 
     /**
      *
@@ -73,7 +73,7 @@ public class Exam implements Cloneable, Serializable {
      *
      * @mbg.generated
      */
-    public Exam(Integer id, String className, String classNumber, Integer dayLimit, Integer statu, String mark) {
+    public Exam(Integer id, String className, String classNumber, Integer dayLimit, String statu, String mark) {
         this.id = id;
         this.className = className;
         this.classNumber = classNumber;
@@ -240,7 +240,7 @@ public class Exam implements Cloneable, Serializable {
      *
      * @mbg.generated
      */
-    public Integer getStatu() {
+    public String getStatu() {
         return statu;
     }
 
@@ -250,7 +250,7 @@ public class Exam implements Cloneable, Serializable {
      *
      * @mbg.generated
      */
-    public Exam withStatu(Integer statu) {
+    public Exam withStatu(String statu) {
         this.setStatu(statu);
         return this;
     }
@@ -263,7 +263,7 @@ public class Exam implements Cloneable, Serializable {
      *
      * @mbg.generated
      */
-    public void setStatu(Integer statu) {
+    public void setStatu(String statu) {
         this.statu = statu;
     }
 
@@ -393,7 +393,7 @@ public class Exam implements Cloneable, Serializable {
         className("class_name", "className", "VARCHAR", false),
         classNumber("class_number", "classNumber", "VARCHAR", false),
         dayLimit("day_limit", "dayLimit", "INTEGER", false),
-        statu("statu", "statu", "INTEGER", false),
+        statu("statu", "statu", "VARCHAR", false),
         mark("mark", "mark", "VARCHAR", false);
 
         /**

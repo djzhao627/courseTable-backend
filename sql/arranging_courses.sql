@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2020-04-23 00:07:28
+Date: 2020-04-26 01:38:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS `classes`;
 CREATE TABLE `classes` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `class_name` varchar(20) NOT NULL DEFAULT '',
-  `class_number` varchar(20) NOT NULL DEFAULT '',
+  `class_number` varchar(20) DEFAULT NULL,
   `day_limit` int(10) DEFAULT '8',
   `statu` int(10) DEFAULT '0',
   `mark` varchar(200) DEFAULT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE `classes` (
 -- ----------------------------
 -- Records of classes
 -- ----------------------------
-INSERT INTO `classes` VALUES ('1', '软件1班', '34', '3', '0', null);
+INSERT INTO `classes` VALUES ('1', '软件1班', '345', '3', '0', null);
 
 -- ----------------------------
 -- Table structure for classroom
@@ -68,8 +68,8 @@ DROP TABLE IF EXISTS `classroom`;
 CREATE TABLE `classroom` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `room_name` varchar(20) NOT NULL DEFAULT '',
-  `room_space` int(4) NOT NULL,
-  `room_layer` int(10) NOT NULL,
+  `room_space` int(4) DEFAULT NULL,
+  `room_layer` int(10) DEFAULT NULL,
   `room_sign` int(11) DEFAULT '0',
   `statu` int(10) DEFAULT '0',
   `mark` varchar(200) DEFAULT NULL,
@@ -117,6 +117,25 @@ CREATE TABLE `course` (
 INSERT INTO `course` VALUES ('1', '数据结构', '30', '0', null);
 
 -- ----------------------------
+-- Table structure for courses_table
+-- ----------------------------
+DROP TABLE IF EXISTS `courses_table`;
+CREATE TABLE `courses_table` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `type` varchar(20) DEFAULT NULL COMMENT '类别',
+  `type_id` int(11) DEFAULT NULL COMMENT '类别ID',
+  `courses` varchar(255) DEFAULT NULL COMMENT '课程数据',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='课程表';
+
+-- ----------------------------
+-- Records of courses_table
+-- ----------------------------
+INSERT INTO `courses_table` VALUES ('1', 'class', '1', '[{\"classStart\":3,\"dayOfWeek\":1,\"name\":\"文科物理学\"},{\"classStart\":5,\"dayOfWeek\":1,\"name\":\"人工智能\"},{\"classStart\":3,\"dayOfWeek\":2,\"name\":\"计算机网络\"},{\"classStart\":5,\"dayOfWeek\":2,\"name\":\"编译原理\"},{\"classStart\":6,\"dayOfWeek\":4,\"name\":\"算法分析与设计\"}]');
+INSERT INTO `courses_table` VALUES ('2', 'engineRoom', '1', '[{\"dayOfWeek\":1,\"classStart\":1,\"name\":\"高等数学\"},{\"dayOfWeek\":3,\"classStart\":3,\"name\":\"大学英语\"},{\"dayOfWeek\":7,\"classStart\":5,\"name\":\"软件工程\"}]');
+INSERT INTO `courses_table` VALUES ('3', 'engineRoom', '2', '[{\"dayOfWeek\":1,\"classStart\":1,\"name\":\"高等数学\"},{\"dayOfWeek\":3,\"classStart\":3,\"name\":\"大学英语\"},{\"dayOfWeek\":7,\"classStart\":5,\"name\":\"软件工程\"}]');
+
+-- ----------------------------
 -- Table structure for course_table
 -- ----------------------------
 DROP TABLE IF EXISTS `course_table`;
@@ -152,8 +171,8 @@ DROP TABLE IF EXISTS `engine_room`;
 CREATE TABLE `engine_room` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `room_name` varchar(20) NOT NULL DEFAULT '',
-  `room_space` int(4) NOT NULL,
-  `room_layer` int(10) NOT NULL,
+  `room_space` int(4) DEFAULT NULL,
+  `room_layer` int(10) DEFAULT NULL,
   `room_sign` int(11) DEFAULT '0',
   `statu` int(10) DEFAULT '0',
   `mark` varchar(200) DEFAULT NULL,
@@ -163,8 +182,46 @@ CREATE TABLE `engine_room` (
 -- ----------------------------
 -- Records of engine_room
 -- ----------------------------
-INSERT INTO `engine_room` VALUES ('1', 'I302', '50', '1', '0', '0', null);
-INSERT INTO `engine_room` VALUES ('2', '啊啊', '77', '3', '0', '0', null);
+INSERT INTO `engine_room` VALUES ('1', 'I302', '500', '1', '0', '0', null);
+INSERT INTO `engine_room` VALUES ('2', '啊啊a', '77', '1', '0', '0', null);
+
+-- ----------------------------
+-- Table structure for exam
+-- ----------------------------
+DROP TABLE IF EXISTS `exam`;
+CREATE TABLE `exam` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `class_name` varchar(20) NOT NULL DEFAULT '',
+  `class_number` varchar(20) DEFAULT '',
+  `day_limit` int(10) DEFAULT '8',
+  `statu` varchar(200) DEFAULT '0',
+  `mark` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of exam
+-- ----------------------------
+INSERT INTO `exam` VALUES ('1', '软件1班', '2020-09', '3', '数学2', '阿瑟东');
+
+-- ----------------------------
+-- Table structure for grade
+-- ----------------------------
+DROP TABLE IF EXISTS `grade`;
+CREATE TABLE `grade` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `class_name` varchar(20) DEFAULT '',
+  `class_number` varchar(20) DEFAULT '',
+  `day_limit` int(10) DEFAULT '8',
+  `statu` int(10) DEFAULT '0',
+  `mark` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of grade
+-- ----------------------------
+INSERT INTO `grade` VALUES ('1', '12', 'C语言', '3', '0', '67');
 
 -- ----------------------------
 -- Table structure for semester
@@ -242,6 +299,27 @@ CREATE TABLE `teaching` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for term_room
+-- ----------------------------
+DROP TABLE IF EXISTS `term_room`;
+CREATE TABLE `term_room` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `room_name` varchar(20) DEFAULT '',
+  `room_space` int(4) DEFAULT NULL,
+  `room_layer` int(10) DEFAULT NULL,
+  `room_sign` int(11) DEFAULT '0',
+  `statu` int(10) DEFAULT '0',
+  `mark` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='教室表';
+
+-- ----------------------------
+-- Records of term_room
+-- ----------------------------
+INSERT INTO `term_room` VALUES ('1', 'I302', '50', '1', '0', '0', '阿瑟东');
+INSERT INTO `term_room` VALUES ('2', '啊啊啊', null, null, '0', '0', '萨达');
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -254,11 +332,13 @@ CREATE TABLE `user` (
   `age` int(3) DEFAULT NULL COMMENT '年纪',
   `statu` int(11) DEFAULT '0',
   `mark` varchar(200) DEFAULT NULL,
+  `class_name` varchar(50) DEFAULT NULL COMMENT '班级',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('17', '1', 'kwk', '123456', null, '23', null, '无');
-INSERT INTO `user` VALUES ('18', '2', 'admin', '123456', null, '21', null, null);
+INSERT INTO `user` VALUES ('17', '1', 'kwk', '123456', '32', '23', null, '123213', null);
+INSERT INTO `user` VALUES ('18', '2', 'admin', '123456', '12', '21', null, '123434', null);
+INSERT INTO `user` VALUES ('19', null, 'DJ小', '123123', '23', null, '0', '12', null);

@@ -38,14 +38,6 @@
                     <input type="text" name="classNum" id="classNum" autocomplete="off" lay-verify="num" placeholder="请输入班级人数" class="layui-input">
                 </div>
             </div>
-       
-        <div class="layui-form-item">
-            <label class="layui-form-label">限制课程</label>
-            <div class="layui-input-inline">
-                <input type="text" name="limit" id="limit" autocomplete="off" lay-verify="num" placeholder="请输入每天限制课程数量"
-                    class="layui-input">
-            </div>
-        </div>
 
         <div class="layui-form-item layui-form-mid">
             <div class="layui-form-item">
@@ -71,7 +63,6 @@
                     } else {
                         $("#className").val(ret.data.className)
                         $("#classNum").val(ret.data.classNumber)
-                        $("#limit").val(ret.data.dayLimit)
 
                     }
                 });
@@ -107,10 +98,10 @@
 
                 var url;
                 if (tag.length == 2) {
-                    url = "http://127.0.0.1:8088/classes/add?className=" + $("#className").val() + "&classNum=" + $("#classNum").val() + "&limit=" + $("#limit").val();
+                    url = "http://127.0.0.1:8088/classes/add?className=" + $("#className").val() + "&classNum=" + $("#classNum").val() + "&limit=0";
                 } else if (tag.length == 3) {
                     let id = window.location.href.split("=")[2];
-                    url = "http://127.0.0.1:8088/classes/update?id=" + id + "&className=" + $("#className").val() + "&classNum=" + $("#classNum").val() + "&limit=" + $("#limit").val();
+                    url = "http://127.0.0.1:8088/classes/update?id=" + id + "&className=" + $("#className").val() + "&classNum=" + $("#classNum").val() + "&limit=0";
                 }
                 console.log(url)
                 var datas = JSON.parse(JSON.stringify(data.field));

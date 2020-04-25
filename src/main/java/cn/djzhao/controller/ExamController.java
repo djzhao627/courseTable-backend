@@ -18,8 +18,8 @@ public class ExamController {
     private IExamService iExamService;
 
     @RequestMapping("add")
-    public ServerResponse<String> add(String className, String classNum, String mark) {
-        return iExamService.add(className, classNum, mark);
+    public ServerResponse<String> add(String className, String classNum, String mark, String subject) {
+        return iExamService.add(className, classNum, mark, subject);
     }
 
     @RequestMapping("del")
@@ -28,8 +28,8 @@ public class ExamController {
     }
 
     @RequestMapping("update")
-    public ServerResponse<String> update(Integer id, String className, String classNum, String mark) {
-        return iExamService.update(id, className, classNum, mark);
+    public ServerResponse<String> update(Integer id, String className, String classNum, String mark, String subject) {
+        return iExamService.update(id, className, classNum, mark, subject);
     }
 
     @RequestMapping("find")

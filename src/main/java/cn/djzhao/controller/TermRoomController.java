@@ -23,8 +23,8 @@ public class TermRoomController {
     private ITermRoomService iTermRoomService;
 
     @RequestMapping("add")
-    public ServerResponse<String> add(String roomName, Integer roomSpace, Integer roomLayer) {
-        return iTermRoomService.add(roomName, roomSpace, roomLayer);
+    public ServerResponse<String> add(String roomName, String mark) {
+        return iTermRoomService.add(roomName, mark);
     }
 
     @RequestMapping("del")
@@ -33,8 +33,8 @@ public class TermRoomController {
     }
 
     @RequestMapping("update")
-    public ServerResponse<String> update(Integer id, String roomName, Integer roomSpace, Integer roomLayer) {
-        return iTermRoomService.update(id, roomName, roomSpace, roomLayer);
+    public ServerResponse<String> update(Integer id, String roomName, String mark) {
+        return iTermRoomService.update(id, roomName, mark);
     }
 
     @RequestMapping("find")

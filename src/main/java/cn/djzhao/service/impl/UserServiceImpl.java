@@ -32,7 +32,7 @@ public class UserServiceImpl implements IUserService {
     private User2Mapper user2Mapper;
 
     @Override
-    public ServerResponse<String> add(String username, String password, String role) {
+    public ServerResponse<String> add(String username, String password, String role, String no) {
         UserQuery query = new UserQuery();
         query.createCriteria().andUsernameEqualTo(username);
         List<User> users = userMapper.selectByExample(query);
@@ -43,6 +43,7 @@ public class UserServiceImpl implements IUserService {
         user.setUsername(username);
         user.setPassword(password);
         user.setRole(role);
+        user.setMark(no);
         int count = userMapper.insertSelective(user);
         if (count > 0) {
             return ServerResponse.createBySuccessMessage("用户创建成功");
@@ -60,6 +61,13 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createBySuccess("登录成功", user);
         }
         return ServerResponse.createByErrorMessage("账号信息错误");
+    }
+
+    @Override
+    public User login(String no, String password) {
+        UserQuery query = new UserQuery();
+        query.createCriteria().andMarkEqualTo(no).andPasswordEqualTo(password);
+        return userMapper.selectOneByExample(query);
     }
 
     @Override
@@ -97,11 +105,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public ServerResponse<String> update(Integer id, String username, String password, String role) {
+    public ServerResponse<String> update(Integer id, String username, String password, String age, String no) {
         User user = userMapper.selectByPrimaryKey(id);
         user.setUsername(username);
         user.setPassword(password);
-        user.setRole(role);
+        user.setMark(no);
+        user.setRole(age);
         int count = userMapper.updateByPrimaryKeySelective(user);
         if (count > 0) {
             return ServerResponse.createBySuccessMessage("更新成功");
