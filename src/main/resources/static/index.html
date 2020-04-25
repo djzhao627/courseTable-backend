@@ -25,8 +25,17 @@
       $("#engine-room").click(function () {
         $("#main").attr("src", "engineRoom.html");
       });
+      $("#term-room").click(function () {
+        $("#main").attr("src", "term.html");
+      });
       $("#user").click(function () {
         $("#main").attr("src", "user.html");
+      });
+      $("#exam-manager").click(function () {
+        $("#main").attr("src", "exam.html");
+      });
+      $("#grade-manager").click(function () {
+        $("#main").attr("src", "grade.html");
       });
       $("#class").click(function () {
         $("#main").attr("src", "class.html");
@@ -107,37 +116,16 @@
             <a id="class" href="javascript:;">班级设置</a>
           </li>
           <li class="layui-nav-item">
-            <a class="" id="classroom" href="javascript:;">教室设置</a>
-          </li>
-          <li class="layui-nav-item">
             <a class="" id="engine-room" href="javascript:;">机房设置</a>
           </li>
           <li class="layui-nav-item">
-            <a id="course" href="javascript:;">课程设置</a>
+            <a class="" id="classroom" href="javascript:;">教室设置</a>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:;" id="teacher">教师设置</a>
+            <a class="" id="term-room" href="javascript:;">学期设置</a>
           </li>
-          <li class="layui-nav-item">
-            <a  id="one"  >排课管理</a>
-          </li>
-          <!-- <li class="layui-nav-item">
-            <a href="javascript:;" id="updateCourse">临时调课</a>
-          </li> -->
           <li class="layui-nav-item">
             <a class="" id="user" href="javascript:;">用户管理</a>
-          </li>
-          <li class="layui-nav-item">
-            <a class="" id="class-table" href="javascript:;">班级课表</a>
-          </li>
-          <li class="layui-nav-item">
-            <a class="" id="room-table1" href="javascript:;">机房课表</a>
-          </li>
-          <li class="layui-nav-item">
-            <a class="" id="room-table2" href="javascript:;">教室课表</a>
-          </li>
-          <li class="layui-nav-item">
-            <a class="" id="term-table" href="javascript:;">学期课表</a>
           </li>
           <li class="layui-nav-item">
             <a class="" id="exam-manager" href="javascript:;">考试管理</a>
@@ -168,13 +156,6 @@
 
 
     });
-
-
-
-
-
-
-
 
   </script>
   <script type="text/javascript" src="./javascript/jquery.min.js"></script>

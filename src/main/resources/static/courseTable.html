@@ -23,13 +23,25 @@
             text-align: center;
         }
 
-        #number {
+        .number {
             width: 70px;
             height: 100px;
         }
     </style>
 
     <script>
+
+        function GetQueryString(name) {
+            let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            let r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }
+        let type = GetQueryString("type");
+        let id = GetQueryString("id");
+
         var table;
         layui.use(['table', 'layedit', 'laydate'], function () {
             table = layui.table //表
@@ -80,6 +92,14 @@
                                     $("#a4").html(text)
                                     $("#a4").css("background-color", "#f2f2f2");
                                 }
+                                if (day == "星期一" && number == 5) {
+                                    $("#a5").html(text)
+                                    $("#a5").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期一" && number == 6) {
+                                    $("#a6").html(text)
+                                    $("#a6").css("background-color", "#f2f2f2");
+                                }
 
                                 if (day == "星期二" && number == 1) {
                                     $("#b1").html(text)
@@ -96,6 +116,14 @@
                                 if (day == "星期二" && number == 4) {
                                     $("#b4").html(text)
                                     $("#b4").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期二" && number == 5) {
+                                    $("#b5").html(text)
+                                    $("#b5").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期二" && number == 6) {
+                                    $("#b6").html(text)
+                                    $("#b6").css("background-color", "#f2f2f2");
                                 }
 
                                 if (day == "星期三" && number == 1) {
@@ -114,6 +142,14 @@
                                     $("#c4").html(text)
                                     $("#c4").css("background-color", "#f2f2f2");
                                 }
+                                if (day == "星期三" && number == 5) {
+                                    $("#c5").html(text)
+                                    $("#c5").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期三" && number == 6) {
+                                    $("#c6").html(text)
+                                    $("#c6").css("background-color", "#f2f2f2");
+                                }
 
                                 if (day == "星期四" && number == 1) {
                                     $("#d1").html(text)
@@ -131,6 +167,14 @@
                                     $("#d4").html(text)
                                     $("#d4").css("background-color", "#f2f2f2");
                                 }
+                                if (day == "星期四" && number == 5) {
+                                    $("#d5").html(text)
+                                    $("#d5").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期四" && number == 6) {
+                                    $("#d6").html(text)
+                                    $("#d6").css("background-color", "#f2f2f2");
+                                }
 
                                 if (day == "星期五" && number == 1) {
                                     $("#e1").html(text)
@@ -147,6 +191,64 @@
                                 if (day == "星期五" && number == 4) {
                                     $("#e4").html(text)
                                     $("#e4").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期五" && number == 5) {
+                                    $("#e5").html(text)
+                                    $("#e5").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期五" && number == 6) {
+                                    $("#e6").html(text)
+                                    $("#e6").css("background-color", "#f2f2f2");
+                                }
+
+                                if (day == "星期六" && number == 1) {
+                                    $("#f1").html(text)
+                                    $("#f1").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期六" && number == 2) {
+                                    $("#f2").html(text)
+                                    $("#f2").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期六" && number == 3) {
+                                    $("#f3").html(text)
+                                    $("#f3").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期六" && number == 4) {
+                                    $("#f4").html(text)
+                                    $("#f4").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期六" && number == 5) {
+                                    $("#f5").html(text)
+                                    $("#f5").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期六" && number == 6) {
+                                    $("#f6").html(text)
+                                    $("#f6").css("background-color", "#f2f2f2");
+                                }
+
+                                if (day == "星期日" && number == 1) {
+                                    $("#g1").html(text)
+                                    $("#g1").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期日" && number == 2) {
+                                    $("#g2").html(text)
+                                    $("#g2").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期日" && number == 3) {
+                                    $("#g3").html(text)
+                                    $("#g3").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期日" && number == 4) {
+                                    $("#g4").html(text)
+                                    $("#g4").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期日" && number == 5) {
+                                    $("#g5").html(text)
+                                    $("#g5").css("background-color", "#f2f2f2");
+                                }
+                                if (day == "星期日" && number == 6) {
+                                    $("#g6").html(text)
+                                    $("#g6").css("background-color", "#f2f2f2");
                                 }
                             });
                         }
@@ -178,73 +280,74 @@
                         <th style="text-align: center">星期三</th>
                         <th style="text-align: center">星期四</th>
                         <th style="text-align: center">星期五</th>
+                        <th style="text-align: center">星期六</th>
+                        <th style="text-align: center">星期日</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td id="number">第一节<br>(8:00-8:55)</td>
+                        <td class="number">第一节<br>(8:00-10:00)</td>
                         <td class="clean" id="a1"></td>
                         <td class="clean" id="b1"></td>
                         <td class="clean" id="c1"></td>
                         <td class="clean" id="d1"></td>
                         <td class="clean" id="e1"></td>
+                        <td class="clean" id="f1"></td>
+                        <td class="clean" id="g1"></td>
 
                     </tr>
                     <tr>
-                        <td id="number">第二节<br>10:00-10:55)</td>
+                        <td class="number">第二节<br>(11:00-12:00)</td>
                         <td class="clean" id="a2"></td>
                         <td class="clean" id="b2"></td>
                         <td class="clean" id="c2"></td>
                         <td class="clean" id="d2"></td>
                         <td class="clean" id="e2"></td>
+                        <td class="clean" id="f2"></td>
+                        <td class="clean" id="g2"></td>
                     </tr>
                     <tr>
-                        <td id="number">第三节<br>(14:00-14:55)</td>
+                        <td class="number">第三节<br>(13:00-15:00)</td>
                         <td class="clean" id="a3"></td>
                         <td class="clean" id="b3"></td>
                         <td class="clean" id="c3"></td>
                         <td class="clean" id="d3"></td>
                         <td class="clean" id="e3"></td>
+                        <td class="clean" id="f3"></td>
+                        <td class="clean" id="g3"></td>
                     </tr>
                     <tr>
-                        <td id="number">第四节<br>(16:00-16:55)</td>
+                        <td class="number">第四节<br>(16:00-18:00)</td>
                         <td class="clean" id="a4"></td>
                         <td class="clean" id="b4"></td>
                         <td class="clean" id="c4"></td>
                         <td class="clean" id="d4"></td>
                         <td class="clean" id="e4"></td>
+                        <td class="clean" id="f4"></td>
+                        <td class="clean" id="g4"></td>
+                    </tr>
+                    <tr>
+                        <td class="number">第五节<br>(19:00-20:00)</td>
+                        <td class="clean" id="a5"></td>
+                        <td class="clean" id="b5"></td>
+                        <td class="clean" id="c5"></td>
+                        <td class="clean" id="d5"></td>
+                        <td class="clean" id="e5"></td>
+                        <td class="clean" id="f5"></td>
+                        <td class="clean" id="g5"></td>
+                    </tr>
+                    <tr>
+                        <td class="number">第六节<br>(20:00-21:00)</td>
+                        <td class="clean" id="a6"></td>
+                        <td class="clean" id="b6"></td>
+                        <td class="clean" id="c6"></td>
+                        <td class="clean" id="d6"></td>
+                        <td class="clean" id="e6"></td>
+                        <td class="clean" id="f6"></td>
+                        <td class="clean" id="g6"></td>
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="layui-col-md4" style="margin-top: 10px;">
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">班级名</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="class" name="class" lay-verify="required" placeholder="请输入"
-                        autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">教师名</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="teacher" name="teacher" lay-verify="required" placeholder="请输入"
-                        autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">周数</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="week" name="week" value="1" lay-verify="num" placeholder="请输入" autocomplete="off"
-                        class="layui-input">
-                </div>
-            </div>
-
-            <div class="layui-form-item">
-                <a class="layui-btn layui-btn"  id="find" lay-event="addTeaching" style="margin-left: 150px;">查询课表</a>
-            </div>
-
         </div>
     </div>
     </div>

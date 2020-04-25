@@ -18,12 +18,11 @@
 
 <script type="text/html" id="toolbarDemo">
         <div class="layui-btn-container">
-          <button class="layui-btn layui-btn-sm" lay-event="add">添加班级</button>
+          <button class="layui-btn layui-btn-sm" lay-event="add">添加成绩</button>
 
         </div>
       </script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs layui-btn-normal" id ="table" lay-event="table">课表</a>
     <a class="layui-btn layui-btn-xs" id ="update" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
   </script>
@@ -39,7 +38,7 @@
         table.render({
             elem: '#demo'
 
-            , url: 'http://127.0.0.1:8088/classes/findAll' //数据接口
+            , url: 'http://127.0.0.1:8088/grade/findAll' //数据接口
             , request: {
                 pageName: 'pageNum' //页码的参数名称，默认：page
                 , limitName: 'pageSize' //每页数据量的参数名，默认：limit
@@ -58,10 +57,10 @@
             , cols: [[ //表头
                 { type: 'checkbox', fixed: 'left' }
                 , { field: 'id', title: 'ID', sort: true, fixed: 'left', align: "center" }
-                , { field: 'className', title: '班级名字', align: "center" }
-                , { field: 'classNumber', title: '班级人数', align: "center" }
+                , { field: 'className', title: '学号', align: "center" }
+                , { field: 'classNumber', title: '考试', align: "center" }
                 // , { field: 'statu', title: '课程门数', align: "center" }
-                // , { field: 'dayLimit', title: '每天限制课程数', align: "center" }
+                , { field: 'mark', title: '分数', align: "center" }
                 , { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
             ]]
         });
@@ -72,7 +71,7 @@
                 , data = checkStatus.data; //获取选中的数据
             switch (obj.event) {
                 case 'add':
-                    add("添加班级");
+                    add("添加分数");
                     break;
                 case 'delete':
                     if (data.length === 0) {
@@ -83,18 +82,7 @@
                         layer.msg("多条删除待开发")
                     }
                     break;
-                case 'sendCourse':
-                    if (data.length === 0) {
-                        layer.msg('请选择一行');
-                    }  else {
-                        var name = "";
-                        for(var x = 0;x<data.length;x++){
-                            name = name+"_"+data[x].className;
-                        }
-                        sendCourse("为班级【" + name.substring(1) + "】分配课程", name.substring(1) );
-                    }
-                    break;
-            };
+            }
         });
 
         //监听行工具事件
@@ -104,33 +92,14 @@
             if (layEvent === 'del') {
                 del(data)
             } else if (layEvent === 'edit') {
-                opensUer(data, "编辑班级")
-            } else if (layEvent == 'sendCourse') {
-                sendCourse("为班级【" + data.className + "】分配课程", data);
-            } else if (layEvent == 'table') {
-                window.location = "courseTable.html?type=class&id=" + data.id;
+                opensUer(data, "编辑分数")
             }
         });
     });
 
-    //分课
-    function sendCourse(title, data) {
-        var url = 'son/sendCourse.html?className='+data;
-        layer.open({
-            id: 'sendCourse',
-            type: 2,
-            title: title,
-            maxmin: true,
-            shadeClose: false, //点击遮罩关闭层
-            area: ['700px', '590px'],
-            content: url,
-            anim: 1,
-        });
-    }
-
     //添加用户
     function add(title) {
-        var url = 'son/classson.html?tag=add'
+        var url = 'son/gradeson.html?tag=add'
         layer.open({
             id: 'user',
             type: 2,
@@ -146,7 +115,7 @@
     //删除用户
     function del(data) {
         layer.confirm('真的删除么', function (index) {
-            var url = "http://127.0.0.1:8088/classes/del?id=" + data.id;
+            var url = "http://127.0.0.1:8088/grade/del?id=" + data.id;
             $.get(url, function (data, status) {
                 console.log(url)
                 var ret = JSON.parse(JSON.stringify(data));
@@ -161,7 +130,7 @@
 
     //打开用户编辑窗口
     function opensUer(data, title) {
-        var url = 'son/classson.html?tag=update=' + data.id;
+        var url = 'son/gradeson.html?tag=update=' + data.id;
         layer.open({
             id: 'user',
             type: 2,
@@ -176,7 +145,7 @@
     //重新加载table
     function reload() {
         table.reload('demo', {
-            url: 'http://127.0.0.1:8088/classes/findAll'
+            url: 'http://127.0.0.1:8088/grade/findAll'
         })
     }
 </script>
