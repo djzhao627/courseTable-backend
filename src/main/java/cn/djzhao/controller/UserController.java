@@ -85,7 +85,7 @@ public class UserController {
     @RequestMapping("findAll")
     public LayerResponse<List<User2>> findAll(HttpSession session, Integer pageNum, Integer pageSize) {
         User user = (User) session.getAttribute(session.getId());
-        ServerResponse<PageInfo<User2>> all = iUserService.findAll("超级管理员", pageNum, pageSize);
+        ServerResponse<PageInfo<User2>> all = iUserService.findAll("会员", pageNum, pageSize);
         return ToLayerUtil.toLayer(all);
     }
 

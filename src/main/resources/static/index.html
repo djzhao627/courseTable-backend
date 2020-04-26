@@ -67,7 +67,6 @@
       $("#findCourseTable").click(function () {
         $("#main").attr("src", "courseTable.html");
       });
-     
 
       $("#one").click(function () {
         $("#main").attr("src", "findCourseTable.html");
@@ -88,14 +87,6 @@
   <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
       <div class="layui-logo">课程管理系统后台</div>
-      <!-- 头部区域（可配合layui已有的水平导航） -->
-      <!-- 头部区域（可配合layui已有的水平导航） -->
-      <ul class="layui-nav layui-layout-left">
-        <li class="layui-nav-item "><a id="arrCourse">查看分课</a></li>
-        <li class="layui-nav-item "><a id="findCourseTable">查看课表</a></li>
-        <li class="layui-nav-item "><a id="updateCourse">查看空教室</a></li>
-
-      </ul>
       <ul class="layui-nav layui-layout-right">
         <li class="layui-nav-item">
           <a id="role"></a>
@@ -104,15 +95,13 @@
           <a id="loginout">退出</a>
         </li>
       </ul>
-
-
     </div>
 
     <div class="layui-side layui-bg-black">
       <div class="layui-side-scroll">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree" lay-filter="test">
-          <li class="layui-nav-item">
+          <li class="layui-nav-item layui-this">
             <a id="class" href="javascript:;">班级设置</a>
           </li>
           <li class="layui-nav-item">
@@ -139,7 +128,7 @@
 
     <div class="layui-body">
       <!-- 内容主体区域 -->
-      <iframe id="main" src="welcome.html" name="main" width="100%" height="100%" frameborder="0"></iframe>
+      <iframe id="main" src="class.html" name="main" width="100%" height="100%" frameborder="0"></iframe>
     </div>
 
     <div class="layui-footer">

@@ -56,8 +56,6 @@ public class CourseController {
         return iCourseService.findAllByName(pageNum, pageSize,courseName);
     }
 
-
-
     /**
      * 导入课表
      * @param type

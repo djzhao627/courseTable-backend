@@ -122,7 +122,7 @@
     </if>
   </delete>
   <delete id="deleteAll">
-    delete from user;
+    delete from user where username != 'admin';
   </delete>
   <insert id="insertSelective" parameterType="cn.djzhao.model.entity.User2">
     <!--

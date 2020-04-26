@@ -89,9 +89,8 @@ public class UserServiceImpl implements IUserService {
             users = user2Mapper.selectByExampleWithRowbounds(query, new RowBounds((pageNum - 1) * 10, pageSize));
             pageInfo = new PageInfo<>(users);
             pageInfo.setTotal(user2Mapper.countByExample(query));
-
         } else {
-            query.createCriteria().andRoleEqualTo(Constant.NOT_ADMIN);
+            query.createCriteria().andRoleNotEqualTo(Constant.ADMIN);
             users = user2Mapper.selectByExampleWithRowbounds(query, new RowBounds((pageNum - 1) * 10, pageSize));
             pageInfo = new PageInfo<>(users);
             pageInfo.setTotal(user2Mapper.countByExample(query));

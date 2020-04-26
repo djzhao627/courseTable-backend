@@ -111,7 +111,7 @@ public class ApiController {
 
     @RequestMapping("getExams")
     public List<Map<String, Object>> getExams() {
-        String sql = "select * from exam";
+        String sql = "select class_name as className, class_number as classNumber, statu, mark from exam";
         List<Map<String, Object>> exams;
         exams = jdbcTemplate.queryForList(sql);
         return exams;
@@ -119,7 +119,7 @@ public class ApiController {
 
     @RequestMapping("getGrades")
     public List<Map<String, Object>> getGrades(String no) {
-        String sql = "select * from grade where class_name = ?";
+        String sql = "select class_name as className, class_number as classNumber, statu, mark from grade where class_name = ?";
         List<Map<String, Object>> grades;
         grades = jdbcTemplate.queryForList(sql, no);
         return grades;
