@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : MYSQL：000000
+Source Server         : MySQL：000000
 Source Server Version : 50621
 Source Host           : localhost:3306
 Source Database       : arranging_courses
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2020-04-26 15:14:34
+Date: 2020-04-28 21:36:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -124,17 +124,16 @@ CREATE TABLE `courses_table` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `type` varchar(20) DEFAULT NULL COMMENT '类别',
   `type_id` int(11) DEFAULT NULL COMMENT '类别ID',
-  `courses` varchar(255) DEFAULT NULL COMMENT '课程数据',
+  `courses` longtext COMMENT '课程数据',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='课程表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COMMENT='课程表';
 
 -- ----------------------------
 -- Records of courses_table
 -- ----------------------------
 INSERT INTO `courses_table` VALUES ('1', 'class', '1', '[{\"classStart\":3,\"dayOfWeek\":1,\"name\":\"文科物理学\"},{\"classStart\":5,\"dayOfWeek\":1,\"name\":\"人工智能\"},{\"classStart\":3,\"dayOfWeek\":2,\"name\":\"计算机网络\"},{\"classStart\":5,\"dayOfWeek\":2,\"name\":\"编译原理\"},{\"classStart\":6,\"dayOfWeek\":4,\"name\":\"算法分析与设计\"}]');
-INSERT INTO `courses_table` VALUES ('2', 'engineRoom', '1', '[{\"dayOfWeek\":1,\"classStart\":1,\"name\":\"高等数学\"},{\"dayOfWeek\":3,\"classStart\":3,\"name\":\"大学英语\"},{\"dayOfWeek\":7,\"classStart\":5,\"name\":\"软件工程\"}]');
 INSERT INTO `courses_table` VALUES ('3', 'engineRoom', '2', '[{\"dayOfWeek\":1,\"classStart\":1,\"name\":\"高等数学\"},{\"dayOfWeek\":3,\"classStart\":3,\"name\":\"大学英语\"},{\"dayOfWeek\":7,\"classStart\":5,\"name\":\"软件工程\"}]');
-INSERT INTO `courses_table` VALUES ('4', 'term', '1', '[{\"dayOfWeek\":2,\"classStart\":1,\"name\":\"数据结构\"},{\"dayOfWeek\":5,\"classStart\":4,\"name\":\"高等数学\"},{\"dayOfWeek\":1,\"classStart\":2,\"name\":\"大学英语\"}]');
+INSERT INTO `courses_table` VALUES ('11', 'engineRoom', '1', '[{\"dayOfWeek\":2,\"classStart\":1,\"name\":\"数据结构\"},{\"dayOfWeek\":5,\"classStart\":4,\"name\":\"高等数学\"},{\"dayOfWeek\":1,\"classStart\":2,\"name\":\"大学英语\"},{\"dayOfWeek\":2,\"classStart\":2,\"name\":\"计算机\"},{\"dayOfWeek\":3,\"classStart\":1,\"name\":\"可信计算\"},{\"dayOfWeek\":4,\"classStart\":2,\"name\":\"微机原理\"},{\"dayOfWeek\":5,\"classStart\":5,\"name\":\"心理健康\"}]');
 
 -- ----------------------------
 -- Table structure for course_table
@@ -198,13 +197,12 @@ CREATE TABLE `exam` (
   `statu` varchar(200) DEFAULT '0',
   `mark` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of exam
 -- ----------------------------
-INSERT INTO `exam` VALUES ('1', '软件1班', '2020-09', '3', '数学2', '机房2');
-INSERT INTO `exam` VALUES ('2', '计算机2', '2020-06-09', '8', '数据结构', '三教学楼');
+INSERT INTO `exam` VALUES ('1', '软件1班', '2020-09', '3', '数学2', '阿瑟东');
 
 -- ----------------------------
 -- Table structure for grade
@@ -336,99 +334,11 @@ CREATE TABLE `user` (
   `mark` varchar(200) DEFAULT NULL,
   `class_name` varchar(50) DEFAULT NULL COMMENT '班级',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('17', '1', 'kwk', '123456', '32', '23', null, '123213', null);
 INSERT INTO `user` VALUES ('18', '2', 'admin', '123456', '超级管理员', '21', null, '123434', null);
-INSERT INTO `user` VALUES ('19', null, 'DJ小', '111111', '23', null, '0', '12', null);
-INSERT INTO `user` VALUES ('20', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('21', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('22', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('23', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('24', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('25', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('26', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('27', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('28', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('29', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('30', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('31', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('32', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('33', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('34', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('35', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('36', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('37', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('38', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('39', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('40', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('41', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('42', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('43', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('44', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('45', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('46', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('47', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('48', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('49', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('50', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('51', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('52', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('53', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('54', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('55', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('56', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('57', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('58', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('59', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('60', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('61', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('62', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('63', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('64', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('65', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('66', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('67', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('68', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('69', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('70', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('71', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('72', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('73', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('74', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('75', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('76', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('77', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('78', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('79', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('80', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('81', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('82', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('83', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('84', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('85', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('86', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('87', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('88', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('89', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('90', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('91', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('92', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('93', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('94', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('95', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('96', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('97', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('98', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('99', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('100', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('101', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('102', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('103', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('104', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('105', null, null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('106', null, 'djzhao', '123123', '25', null, null, '119', null);
-INSERT INTO `user` VALUES ('107', null, 'hello', '111111', '21', null, null, '178', null);
+INSERT INTO `user` VALUES ('19', null, 'DJ小', '123123', '23', null, '0', '12', null);

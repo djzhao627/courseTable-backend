@@ -71,13 +71,13 @@ public class CourseController {
         String[] params = new String[2];
         params[0] = type;
         params[1] = typeId;
-        jdbcTemplate.update(sql, Integer.class, params);
+        jdbcTemplate.update(sql, params);
         sql = "insert into courses_table (`type`, type_id, courses) values (?, ?, ?)";
         params = new String[3];
         params[0] = type;
         params[1] = typeId;
         params[2] = courses;
-        Integer number = jdbcTemplate.update(sql, params);
+        int number = jdbcTemplate.update(sql, params);
         if (number > 0) {
             return ServerResponse.createBySuccess(number);
         } else {

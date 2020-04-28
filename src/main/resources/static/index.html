@@ -13,7 +13,12 @@
      * 页面初始化
      * */
     $(document).ready(function () {
-      $("#role").text(localStorage.getItem("role") + ": " + localStorage.getItem("username"));
+      let role = localStorage.getItem("role");
+      if (role == undefined || role == "") {
+        window.location = "./login.html";
+      }
+
+      $("#role").text(role + ": " + localStorage.getItem("username"));
       $("#loginout").click(function () {
         localStorage.clear;
         window.location = "./login.html";
