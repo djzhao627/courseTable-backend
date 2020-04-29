@@ -23,12 +23,6 @@ public class GradeServiceImpl implements IGradeService {
 
     @Override
     public ServerResponse<String> add(String className, String classNum, String mark) {
-        GradeQuery query = new GradeQuery();
-        query.createCriteria().andClassNameEqualTo(className);
-        Grade Grade = GradeMapper.selectOneByGradeple(query);
-        if (Grade != null) {
-            return ServerResponse.createByErrorMessage("考试已经存在");
-        }
         Grade c = new Grade();
         c.setClassName(className);
         c.setClassNumber(classNum);

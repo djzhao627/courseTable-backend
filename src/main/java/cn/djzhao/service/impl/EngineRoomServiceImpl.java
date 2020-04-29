@@ -30,12 +30,6 @@ public class EngineRoomServiceImpl implements IEngineRoomService {
 
     @Override
     public ServerResponse<String> add(String roomName, Integer roomSpace, Integer roomLayer) {
-        EngineRoomQuery query = new EngineRoomQuery();
-        query.createCriteria().andRoomNameEqualTo(roomName);
-        EngineRoom EngineRoom = engineRoomMapper.selectOneByExample(query);
-        if (EngineRoom != null) {
-            return ServerResponse.createByErrorMessage("机房已经存在");
-        }
         EngineRoom c = new EngineRoom();
         c.setRoomName(roomName);
         c.setRoomSpace(roomSpace);

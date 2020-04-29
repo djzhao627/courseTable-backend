@@ -23,12 +23,6 @@ public class ExamServiceImpl implements IExamService {
 
     @Override
     public ServerResponse<String> add(String className, String classNum, String mark, String subject) {
-        ExamQuery query = new ExamQuery();
-        query.createCriteria().andClassNameEqualTo(className);
-        Exam Exam = ExamMapper.selectOneByExample(query);
-        if (Exam != null) {
-            return ServerResponse.createByErrorMessage("考试已经存在");
-        }
         Exam c = new Exam();
         c.setClassName(className);
         c.setClassNumber(classNum);

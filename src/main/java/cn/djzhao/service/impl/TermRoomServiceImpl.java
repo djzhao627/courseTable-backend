@@ -31,12 +31,6 @@ public class TermRoomServiceImpl implements ITermRoomService {
 
     @Override
     public ServerResponse<String> add(String roomName, String mark) {
-        TermRoomQuery query = new TermRoomQuery();
-        query.createCriteria().andRoomNameEqualTo(roomName);
-        TermRoom TermRoom = TermRoomMapper.selectOneByExample(query);
-        if (TermRoom != null) {
-            return ServerResponse.createByErrorMessage("教室已经存在");
-        }
         TermRoom c = new TermRoom();
         c.setRoomName(roomName);
         c.setMark(mark);
